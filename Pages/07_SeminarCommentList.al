@@ -1,4 +1,4 @@
-page 123456707 "Seminar Commment List"
+page 123456707 "Seminar Comment List"
 {
     PageType = List;
     SourceTable = "Seminar Comment Line";

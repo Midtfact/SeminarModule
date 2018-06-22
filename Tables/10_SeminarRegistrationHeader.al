@@ -31,7 +31,7 @@ table 123456710 "Seminar Registration Header"
         }
         field(3; "Seminar No."; Code[20])
         {
-            Caption='Seminar No.';
+            Caption = 'Seminar No.';
             TableRelation = Seminar;
 
             trigger OnValidate();
@@ -79,7 +79,7 @@ table 123456710 "Seminar Registration Header"
         }
         field(6; "Instructor Name"; Text[50])
         {
-            Caption='Instructor Name';
+            Caption = 'Instructor Name';
 
             CalcFormula = Lookup (Resource.Name where ("No." = Field ("Instructor Resource No."),
                                                       Type = const (Person)));
@@ -150,11 +150,11 @@ table 123456710 "Seminar Registration Header"
         }
         field(12; "Room Name"; Text[30])
         {
-            Caption= 'Room Name';
+            Caption = 'Room Name';
         }
         field(13; "Room Address"; Text[30])
         {
-            Caption= 'Room Address';
+            Caption = 'Room Address';
         }
         field(14; "Room Address 2"; Text[30])
         {
@@ -162,7 +162,7 @@ table 123456710 "Seminar Registration Header"
         }
         field(15; "Room Post Code"; Code[20])
         {
-            Caption= 'Room Post Code';
+            Caption = 'Room Post Code';
             TableRelation = "Post Code".Code;
             ValidateTableRelation = false;
 
@@ -321,8 +321,8 @@ table 123456710 "Seminar Registration Header"
 
     trigger OnDelete();
     begin
-        if (CurrFieldNo>0) then
-            TestField(Status,Status::Canceled);
+        if(CurrFieldNo > 0) then
+            TestField(Status, Status::Canceled);
         SeminarRegLine.RESET;
         SeminarRegLine.SETRANGE("Document No.", "No.");
         SeminarRegLine.SETRANGE(Registered, true);
@@ -354,6 +354,11 @@ table 123456710 "Seminar Registration Header"
             NoSeriesMgt.InitSeries(SeminarSetup."Seminar Registration Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         InitRecord;
+        // >> Lab 8 1-1
+        if GetFilter("Seminar No.") <> '' then
+            if GetRangeMin("Seminar No.") = GetRangeMax("Seminar No.") then
+                Validate("Seminar No.", GetRangeMin("Seminar No."));
+        // << Lab 8 1-1
     end;
 
     local procedure InitRecord();
@@ -363,7 +368,7 @@ table 123456710 "Seminar Registration Header"
         "Document Date" := WORKDATE;
         SeminarSetup.GET;
         NoSeriesMgt.SetDefaultSeries("Posting No. Series", SeminarSetup."Posted Seminar Reg. Nos.");
-    
+
     end;
 
     procedure AssistEdit(OldSeminarRegHeader: Record "Seminar Registration Header"): Boolean;
