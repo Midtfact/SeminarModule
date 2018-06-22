@@ -1,4 +1,4 @@
-page 123456706 "Seminar Commment Sheet"
+page 123456706 "Seminar Comment Sheet"
 {
     Caption='Seminar Comment Sheet';
     PageType = List;

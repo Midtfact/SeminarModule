@@ -11,6 +11,7 @@ page 123456701 "Seminar Card"
             {
                 field("No."; "No.")
                 {
+                    AssistEdit=true;
                     trigger OnAssistEdit();
                     begin
                         if AssistEdit then
@@ -82,8 +83,8 @@ page 123456701 "Seminar Card"
 
                 action("Co&mments")
                 {
-                    //RunObject=page "Seminar Comment Sheet";
-                    //RunPageLink="TableName"=const(Seminar),"No."=field("No.");
+                    RunObject=page "Seminar Comment Sheet";
+                    RunPageLink="Table Name"=const(Seminar),"No."=field("No.");
                     Image = Comment;
                     Promoted = true;
                     PromotedIsBig = true;
